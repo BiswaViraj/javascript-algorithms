@@ -90,12 +90,13 @@ class SinglyLinkedList {
         if (index === this.length) return !!this.push(val);
         if (index === 0) return !!this.unshift(val);
 
-        let newNode = new Node(val);
-        let prev = this.get(index - 1);
-        let temp = prev.next;
-        prev.next = newNode;
-        newNode.next = temp;
+        const newNode = new Node(val);
+        let previousNode = this.get(index - 1);
+
+        newNode.next = previousNode.next;
+        previousNode.next = newNode;
         this.length++;
+
         return true;
     }
     // Removes the node from the given index
@@ -125,5 +126,19 @@ class SinglyLinkedList {
         }
 
         return this;
+    }
+
+    // Prints the list
+    printList() {
+        let array = [];
+
+        let currentNode = this.head;
+
+        while (currentNode) {
+            array.push(currentNode.value);
+            currentNode = currentNode.next;
+        }
+
+        return array;
     }
 }
